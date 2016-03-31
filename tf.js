@@ -151,17 +151,40 @@ Function.prototype.bind = function(obj) {
         return matches;
     }
 
+    function randint(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     function randnums(min, max, number) {
-        
+        var vals = [];
+        for (var ii = 0; ii < number; ii++) {
+            vals.push(randint(min, max));
+        }
+        return vals;
     }
 
     // ------------------------------------------------------------------ //
 
     function reload() {
-        var num_answers = document.getElementById("show");
-        var num_answers = document.getElementById("show");
+        var exprs = [];
+        var vals;
+        while (exprs.length < 1) {
+            vals = randnums(1, 12, 4);
+            exprs = find_exprs(vals, 24);
+        }
+        var numbers = document.getElementById("numbers");
+        var num_answers = document.getElementById("num_answers");
+        var answers = document.getElementById("answers");
+        wd.removeClass(answers, "shown")
+        wd.addClass(answers, "hidden")
+
+        numbers.innerHTML = "<pre>" + vals + "</pre>";
+        num_answers.innerHTML = "<pre>(" + exprs.length + " answers found)</pre>";
+        answers.innerHTML = "<pre>" + exprs.join("\n") + "</pre>";
     }
-    
+
+    reload();
+
     // ------------------------------------------------------------------ //
 
     var show_button = document.getElementById("show");
@@ -175,5 +198,8 @@ Function.prototype.bind = function(obj) {
             wd.addClass(answers, "hidden")
         }
     });
+
+    var reload_button = document.getElementById("reload");
+    wd.addEventListener(reload_button, 'click', reload);
 
 }());
