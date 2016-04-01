@@ -1,6 +1,9 @@
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 .shown {
-    visibility: visible;
+    display: inline;
+}
+.in {
+    width: 15px;
 }
