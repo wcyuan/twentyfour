@@ -1,8 +1,10 @@
 .hidden {
     display: none;
+    visibility: hidden;
 }
 .shown {
     display: inline;
+    visibility: visible;
 }
 .in {
     width: 15px;
